@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+  Вы успешно вышли с аккаунта
+{% endblock %}
+
+{% block content %}
+  <h1>Вы успешно вышли с аккаунта</h1>
+  <a href="{% url 'user' %}">Войти в личный кабинет снова</a>
+{% endblock %}
+
+
+{% block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+<img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail">
+<p>Уже не первый год слышно много положительных отзывов про движок Godot. Пришло время узнать больше об этом движке и выяснить почему он столь популярен.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+
+<img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail mt-4">
+<p>Для многих Python - это язык для написания веб проектов, машинного обучения или для анализа данных. На самом деле он более функционален и в этой статье мы вам это докажем.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock %}

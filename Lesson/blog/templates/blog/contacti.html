@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+  Контакты
+{% endblock %}
+
+{% block content %}
+  <div style="margin:80px">
+    <h1>Контакты</h1>
+    <h4>Напишите нам, если у вас есть вопросы</h4>
+    <p>
+        Пожалуйста, напишите свое имя, адрес электронной почты и сообщение.
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success" type="submit">Отправить</button>
+    </form>
+  </div>
+{% endblock %}
+
+
+{% block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+<img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail">
+<p>Уже не первый год слышно много положительных отзывов про движок Godot. Пришло время узнать больше об этом движке и выяснить почему он столь популярен.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+
+<img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail mt-4">
+<p>Для многих Python - это язык для написания веб проектов, машинного обучения или для анализа данных. На самом деле он более функционален и в этой статье мы вам это докажем.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock %}

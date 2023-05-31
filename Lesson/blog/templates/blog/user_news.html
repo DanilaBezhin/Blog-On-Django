@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  <h2>Все статьи от автора {{ view.kwargs.username }}</h2>
+  <h4>Количество статей: {{ page_obj.paginator.count }}</h4><br>
+  {% for post in news %}
+    <div class="alert alert-light">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.text|striptags|truncatechars:200 }}</p>
+      <div class="row">
+        <div>
+          <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="user_images">
+        </div>
+        <div class="mt-2">
+          <span class="text-muted">Публикация: {{ post.date|date:"d E Y в H:i" }}</span>
+          <p><b>Автор:</b> <a href="{% url 'user-news' post.avtor %}">{{ post.avtor }}</a></p>
+        </div>
+      </div>
+      <a href="{% url 'news-detail' post.id %}" class="btn btn-outline-warning mt-3">Читать далее</a>
+    </div>
+  {% endfor %}
+
+  {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <a href="{% url 'home' %}" class="btn btn-outline-danger">В начало</a>
+      <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-danger">Назад</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+        <button class="btn btn-danger" disabled>{{ num }}</button>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a href="?page={{ num }}" class="btn btn-danger">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-danger">Вперед</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-danger">В конец</a>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block aside_block %}
+<h4 class="mt-2">Интересные статьи</h4>
+<img src="https://itproger.com/img/news/1589893627.jpg" class="img-thumbnail">
+<p>Для многих Python - это язык для написания веб проектов, машинного обучения или для анализа данных. На самом деле он более функционален и в этой статье мы вам это докажем.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+
+<img src="https://itproger.com/img/news/1591879929.jpg" class="img-thumbnail mt-4">
+<p>Уже не первый год слышно много положительных отзывов про движок Godot. Пришло время узнать больше об этом движке и выяснить почему он столь популярен.</p>
+
+<a href="https://itproger.com/news/285" target="_blank">
+  <button class="btn btn-warning">Посмотреть</button>
+</a>
+{% endblock %}
